@@ -1,6 +1,9 @@
 'use client';
 
+import { useState } from 'react';
 import FeedbackButtons from '@/components/FeedbackButtons';
+import PdfModal from '@/components/PdfModal';
+import { getPdfUrl, isPdfAvailable } from '@/lib/pdf-urls';
 
 interface ChatMessageProps {
   role: "user" | "assistant";
@@ -11,6 +14,18 @@ interface ChatMessageProps {
 
 export const ChatMessage = ({ role, content, citations, logId }: ChatMessageProps) => {
   const isUser = role === "user";
+  const [pdfModalOpen, setPdfModalOpen] = useState(false);
+  const [selectedPdf, setSelectedPdf] = useState<{ url: string; filename: string } | null>(null);
+
+  const handlePdfClick = (filename: string) => {
+    if (isPdfAvailable(filename)) {
+      setSelectedPdf({
+        url: getPdfUrl(filename),
+        filename: filename
+      });
+      setPdfModalOpen(true);
+    }
+  };
 
   return (
     <div className={`flex ${isUser ? "justify-end" : "justify-start"} animate-fade-in`}>
@@ -60,15 +75,45 @@ export const ChatMessage = ({ role, content, citations, logId }: ChatMessageProp
 
                 return Array.from(fileMap.entries()).map(([fileName, pagesSet], idx) => {
                   const sortedPages = Array.from(pagesSet).sort((a: any, b: any) => a - b);
+                  const isClickable = isPdfAvailable(fileName);
+
                   return (
                     <div
                       key={idx}
-                      className="bg-yellow-50 border-l-4 border-[#ece31e]
-                                 rounded-lg p-3 text-xs sm:text-sm"
+                      onClick={() => isClickable && handlePdfClick(fileName)}
+                      className={`group relative bg-gradient-to-br from-white to-gray-50
+                                 border border-gray-200 rounded-xl p-4 text-xs sm:text-sm
+                                 transition-all duration-200 shadow-sm
+                                 ${isClickable ? 'cursor-pointer hover:shadow-lg hover:border-blue-300 hover:scale-[1.02]' : ''}`}
                     >
-                      <p className="font-semibold text-gray-800 mb-1">{fileName}</p>
-                      {sortedPages.length > 0 && (
-                        <p className="text-gray-600">Pagina {sortedPages.join(', ')}</p>
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2 mb-2">
+                            <svg className="w-4 h-4 flex-shrink-0 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                              <path d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" />
+                            </svg>
+                            <p className={`font-semibold text-gray-900 truncate transition-colors
+                                         ${isClickable ? 'group-hover:text-blue-600' : ''}`}>
+                              {fileName}
+                            </p>
+                          </div>
+                          {sortedPages.length > 0 && (
+                            <p className="text-gray-600 text-xs ml-6">
+                              📄 Pagina {sortedPages.join(', ')}
+                            </p>
+                          )}
+                        </div>
+                        {isClickable && (
+                          <div className="flex-shrink-0">
+                            <div className="px-3 py-1.5 bg-blue-50 text-blue-700 rounded-lg text-xs font-medium
+                                          group-hover:bg-blue-100 transition-colors">
+                              Bekijken
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                      {isClickable && (
+                        <div className="absolute inset-0 bg-blue-500/5 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
                       )}
                     </div>
                   );
@@ -83,6 +128,16 @@ export const ChatMessage = ({ role, content, citations, logId }: ChatMessageProp
           )}
         </div>
       </div>
+
+      {/* PDF Modal */}
+      {selectedPdf && (
+        <PdfModal
+          isOpen={pdfModalOpen}
+          onClose={() => setPdfModalOpen(false)}
+          pdfUrl={selectedPdf.url}
+          filename={selectedPdf.filename}
+        />
+      )}
     </div>
   );
 };
