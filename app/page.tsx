@@ -283,55 +283,52 @@ export default function Home() {
   // RENDER
   // ========================================
   return (
-    <div className="flex flex-col h-screen overflow-hidden">
+    <div className="flex flex-col h-screen">
       {/* Logo Background Pattern - Subtiel op achtergrond */}
       <LogoBackground />
 
-      {/* Main Content - Boven background */}
-      <div className="relative z-10 flex flex-col h-full overflow-hidden">
-        {/* Header met logo en taal selector */}
-        <div className="flex-shrink-0">
-          <ChatHeader
-            selectedLanguage={selectedLanguage}
-            onLanguageChange={setSelectedLanguage}
-          />
-        </div>
+      {/* Header met logo en taal selector */}
+      <div className="relative z-10 flex-shrink-0">
+        <ChatHeader
+          selectedLanguage={selectedLanguage}
+          onLanguageChange={setSelectedLanguage}
+        />
+      </div>
 
-        {/* Chat Area - SCROLLABLE (alleen dit deel scroll!) */}
-        <div className="flex-1 overflow-y-auto overflow-x-hidden">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            {/* Toon welkomstscherm als er nog geen messages zijn */}
-            {messages.length === 0 ? (
-              <WelcomeScreen selectedLanguage={selectedLanguage} />
-            ) : (
-              <div className="space-y-4 sm:space-y-6">
-                {/* Render alle messages */}
-                {messages.map((message, idx) => (
-                  <ChatMessage
-                    key={idx}
-                    role={message.role}
-                    content={message.content}
-                    citations={message.citations}
-                    logId={message.logId}
-                  />
-                ))}
-                {/* Loading indicator tijdens wachten op antwoord */}
-                {isLoading && <LoadingIndicator />}
-                {/* Invisible div voor auto-scroll */}
-                <div ref={messagesEndRef} />
-              </div>
-            )}
-          </div>
+      {/* Chat Area - SCROLLABLE */}
+      <div className="relative z-10 flex-1 overflow-y-auto">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          {/* Toon welkomstscherm als er nog geen messages zijn */}
+          {messages.length === 0 ? (
+            <WelcomeScreen selectedLanguage={selectedLanguage} />
+          ) : (
+            <div className="space-y-4 sm:space-y-6">
+              {/* Render alle messages */}
+              {messages.map((message, idx) => (
+                <ChatMessage
+                  key={idx}
+                  role={message.role}
+                  content={message.content}
+                  citations={message.citations}
+                  logId={message.logId}
+                />
+              ))}
+              {/* Loading indicator tijdens wachten op antwoord */}
+              {isLoading && <LoadingIndicator />}
+              {/* Invisible div voor auto-scroll */}
+              <div ref={messagesEndRef} />
+            </div>
+          )}
         </div>
+      </div>
 
-        {/* Input Area - Fixed onderaan */}
-        <div className="flex-shrink-0">
-          <ChatInput
-            onSendMessage={handleSendMessage}
-            disabled={isLoading}
-            selectedLanguage={selectedLanguage}
-          />
-        </div>
+      {/* Input Area - Fixed onderaan */}
+      <div className="relative z-10 flex-shrink-0">
+        <ChatInput
+          onSendMessage={handleSendMessage}
+          disabled={isLoading}
+          selectedLanguage={selectedLanguage}
+        />
       </div>
     </div>
   );
