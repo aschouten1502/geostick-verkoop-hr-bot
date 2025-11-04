@@ -22,8 +22,8 @@ export const ChatMessage = ({ role, content, citations, logId }: ChatMessageProp
   };
 
   return (
-    <div className={`flex ${isUser ? "justify-end" : "justify-start"} animate-fade-in w-full`}>
-      <div className={`flex gap-3 max-w-[85%] sm:max-w-[75%] w-full ${isUser ? "flex-row-reverse" : "flex-row"}`}>
+    <div className={`flex ${isUser ? "justify-end" : "justify-start"} animate-fade-in w-full overflow-hidden`}>
+      <div className={`flex gap-3 max-w-[85%] sm:max-w-[75%] ${isUser ? "flex-row-reverse" : "flex-row"}`}>
         {/* Avatar */}
         <div className={`flex-shrink-0 w-8 h-8 sm:w-10 sm:h-10 rounded-full flex items-center justify-center shadow-lg
                         ${isUser ? "bg-gradient-to-br from-primary to-primary-dark" : "bg-white"}`}>
