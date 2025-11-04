@@ -68,6 +68,13 @@ Alle documentatie staat in de **`/docs`** folder:
 
 ## ✨ Features
 
+### Progressive Web App (PWA)
+- 📱 **Installeerbaar** op iOS en Android (geen App Store nodig!)
+- 🎨 **Standalone mode** - werkt als native app zonder browser UI
+- 🔌 **Offline support** - blijft werken zonder internet
+- ⚡ **Caching strategies** - snellere laadtijden
+- 🎯 **App-achtige ervaring** - volledige mobiele optimalisatie
+
 ### Chat Interface
 - Multi-taal support (12 talen met automatische detectie)
 - Real-time streaming antwoorden
@@ -179,6 +186,43 @@ Zie [docs/SUPABASE_ANALYTICS.md](./docs/SUPABASE_ANALYTICS.md) voor cost trackin
 ### Developer Sidebar
 ![Developer Sidebar](./docs/assets/dev-sidebar.png)
 *Session statistieken met costs en performance metrics*
+
+---
+
+## 📱 PWA Installatie (App-achtige ervaring)
+
+De Geostick HR Bot is een **Progressive Web App** die geïnstalleerd kan worden als native app op mobiele devices!
+
+### Op iOS (iPhone/iPad)
+
+1. Open de app in **Safari**: `https://geostickqabot-hr-v1.vercel.app`
+2. Tik op het **Deel-icoon** (vierkant met pijl omhoog)
+3. Scroll naar beneden en kies **"Zet op beginscherm"**
+4. Tik **"Voeg toe"**
+5. ✅ De app verschijnt nu op je beginscherm zonder browser UI!
+
+### Op Android (Chrome)
+
+1. Open de app in **Chrome**: `https://geostickqabot-hr-v1.vercel.app`
+2. Tik op het **menu** (drie puntjes rechtsboven)
+3. Selecteer **"App installeren"** of **"Toevoegen aan startscherm"**
+4. Tik **"Installeren"**
+5. ✅ De app opent nu als standalone app zonder adresbalk!
+
+### Op Desktop (Chrome/Edge)
+
+1. Open `https://geostickqabot-hr-v1.vercel.app`
+2. Klik op het **installatie-icoontje** in de adresbalk (➕)
+3. Klik **"Installeren"**
+4. ✅ De app opent als desktop applicatie!
+
+### Voordelen van Installatie
+
+- 🎯 **Geen browser UI** - Volledige scherm app ervaring
+- ⚡ **Sneller** - Gecachte assets voor instant loading
+- 🔌 **Offline support** - Werkt ook zonder internet (met fallback pagina)
+- 📲 **Native gevoel** - Eigen app icoon op startscherm
+- 🎨 **Geostick branding** - Rood theme met logo
 
 ---
 

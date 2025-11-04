@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline - Geostick HR Assistent</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #E31E24 0%, #C41A1F 100%);
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            text-align: center;
+            max-width: 500px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        .icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.1);
+            }
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+
+        .button {
+            display: inline-block;
+            background: white;
+            color: #E31E24;
+            padding: 15px 30px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+        }
+
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .status {
+            margin-top: 20px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .online {
+            color: #90EE90;
+        }
+
+        .offline {
+            color: #FFB6C1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">📡</div>
+        <h1>Je bent offline</h1>
+        <p>
+            De Geostick HR Assistent is momenteel niet bereikbaar omdat je geen internetverbinding hebt.
+            Controleer je verbinding en probeer het opnieuw.
+        </p>
+        <button class="button" onclick="window.location.reload()">
+            Opnieuw proberen
+        </button>
+        <div class="status">
+            Status: <span id="connectionStatus" class="offline">Offline</span>
+        </div>
+    </div>
+
+    <script>
+        // Check connection status
+        function updateConnectionStatus() {
+            const statusElement = document.getElementById('connectionStatus');
+            if (navigator.onLine) {
+                statusElement.textContent = 'Online';
+                statusElement.className = 'online';
+                // Auto-reload when back online
+                setTimeout(() => {
+                    window.location.reload();
+                }, 1000);
+            } else {
+                statusElement.textContent = 'Offline';
+                statusElement.className = 'offline';
+            }
+        }
+
+        // Listen for online/offline events
+        window.addEventListener('online', updateConnectionStatus);
+        window.addEventListener('offline', updateConnectionStatus);
+
+        // Check on load
+        updateConnectionStatus();
+
+        // Periodic check (every 5 seconds)
+        setInterval(updateConnectionStatus, 5000);
+    </script>
+</body>
+</html>

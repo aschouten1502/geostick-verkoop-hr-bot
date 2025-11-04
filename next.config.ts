@@ -1,4 +1,5 @@
 import type { NextConfig } from "next";
+import withPWA from "@ducanh2912/next-pwa";
 
 const nextConfig: NextConfig = {
   eslint: {
@@ -12,4 +13,64 @@ const nextConfig: NextConfig = {
   },
 };
 
-export default nextConfig;
+// PWA Configuration
+const pwaConfig = withPWA({
+  dest: "public",
+  disable: process.env.NODE_ENV === "development", // Disable PWA in development for faster builds
+  register: true,
+  fallbacks: {
+    document: "/offline.html", // Fallback page when offline
+  },
+  workboxOptions: {
+    disableDevLogs: true,
+    runtimeCaching: [
+      {
+        urlPattern: /^https:\/\/fonts\.(?:googleapis|gstatic)\.com\/.*/i,
+        handler: "CacheFirst",
+        options: {
+          cacheName: "google-fonts",
+          expiration: {
+            maxEntries: 4,
+            maxAgeSeconds: 365 * 24 * 60 * 60, // 1 year
+          },
+        },
+      },
+      {
+        urlPattern: /^https:\/\/.*\.(?:png|jpg|jpeg|svg|gif|webp)$/i,
+        handler: "CacheFirst",
+        options: {
+          cacheName: "image-cache",
+          expiration: {
+            maxEntries: 64,
+            maxAgeSeconds: 30 * 24 * 60 * 60, // 30 days
+          },
+        },
+      },
+      {
+        urlPattern: /\/api\/chat/,
+        handler: "NetworkFirst",
+        options: {
+          cacheName: "api-cache",
+          networkTimeoutSeconds: 10,
+          expiration: {
+            maxEntries: 50,
+            maxAgeSeconds: 5 * 60, // 5 minutes
+          },
+        },
+      },
+      {
+        urlPattern: /\.(?:js|css)$/i,
+        handler: "StaleWhileRevalidate",
+        options: {
+          cacheName: "static-resources",
+          expiration: {
+            maxEntries: 60,
+            maxAgeSeconds: 24 * 60 * 60, // 24 hours
+          },
+        },
+      },
+    ],
+  },
+});
+
+export default pwaConfig(nextConfig);
