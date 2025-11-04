@@ -283,12 +283,12 @@ export default function Home() {
   // RENDER
   // ========================================
   return (
-    <div className="flex flex-col h-screen">
+    <div className="flex flex-col h-screen w-screen overflow-x-hidden">
       {/* Logo Background Pattern - Subtiel op achtergrond */}
       <LogoBackground />
 
       {/* Header met logo en taal selector */}
-      <div className="relative z-10 flex-shrink-0">
+      <div className="relative z-10 flex-shrink-0 w-full">
         <ChatHeader
           selectedLanguage={selectedLanguage}
           onLanguageChange={setSelectedLanguage}
@@ -296,8 +296,8 @@ export default function Home() {
       </div>
 
       {/* Chat Area - SCROLLABLE */}
-      <div className="relative z-10 flex-1 overflow-y-auto">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+      <div className="relative z-10 flex-1 overflow-y-auto overflow-x-hidden w-full">
+        <div className="w-full px-4 sm:px-6 py-6">
           {/* Toon welkomstscherm als er nog geen messages zijn */}
           {messages.length === 0 ? (
             <WelcomeScreen selectedLanguage={selectedLanguage} />
@@ -323,7 +323,7 @@ export default function Home() {
       </div>
 
       {/* Input Area - Fixed onderaan */}
-      <div className="relative z-10 flex-shrink-0">
+      <div className="relative z-10 flex-shrink-0 w-full">
         <ChatInput
           onSendMessage={handleSendMessage}
           disabled={isLoading}
