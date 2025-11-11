@@ -314,7 +314,7 @@ export default function Home() {
                 />
               ))}
               {/* Loading indicator tijdens wachten op antwoord */}
-              {isLoading && <LoadingIndicator />}
+              {isLoading && <LoadingIndicator language={selectedLanguage as any} />}
               {/* Invisible div voor auto-scroll */}
               <div ref={messagesEndRef} />
             </div>

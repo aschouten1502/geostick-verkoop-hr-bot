@@ -14,7 +14,10 @@ export const translations = {
     ],
     inputPlaceholder: "Stel je vraag...",
     citationsLabel: "Bronnen",
-    pageLabel: "Pagina"
+    pageLabel: "Pagina",
+    factCategoryTechnology: "Technologie",
+    factCategorySustainability: "Duurzaamheid",
+    factCategorySocial: "Medewerkers"
   },
   en: {
     appTitle: "Geostick HR Assistant",
@@ -31,7 +34,10 @@ export const translations = {
     ],
     inputPlaceholder: "Ask your question...",
     citationsLabel: "Sources",
-    pageLabel: "Page"
+    pageLabel: "Page",
+    factCategoryTechnology: "Technology",
+    factCategorySustainability: "Sustainability",
+    factCategorySocial: "Employees"
   },
   de: {
     appTitle: "Geostick HR Assistent",
@@ -48,7 +54,10 @@ export const translations = {
     ],
     inputPlaceholder: "Stellen Sie Ihre Frage...",
     citationsLabel: "Quellen",
-    pageLabel: "Seite"
+    pageLabel: "Seite",
+    factCategoryTechnology: "Technologie",
+    factCategorySustainability: "Nachhaltigkeit",
+    factCategorySocial: "Mitarbeiter"
   },
   fr: {
     appTitle: "Assistant RH Geostick",
@@ -65,7 +74,10 @@ export const translations = {
     ],
     inputPlaceholder: "Posez votre question...",
     citationsLabel: "Sources",
-    pageLabel: "Page"
+    pageLabel: "Page",
+    factCategoryTechnology: "Technologie",
+    factCategorySustainability: "Durabilité",
+    factCategorySocial: "Employés"
   },
   es: {
     appTitle: "Asistente de RRHH Geostick",
@@ -82,7 +94,10 @@ export const translations = {
     ],
     inputPlaceholder: "Haga su pregunta...",
     citationsLabel: "Fuentes",
-    pageLabel: "Página"
+    pageLabel: "Página",
+    factCategoryTechnology: "Tecnología",
+    factCategorySustainability: "Sostenibilidad",
+    factCategorySocial: "Empleados"
   },
   it: {
     appTitle: "Assistente HR Geostick",
@@ -99,7 +114,10 @@ export const translations = {
     ],
     inputPlaceholder: "Fai la tua domanda...",
     citationsLabel: "Fonti",
-    pageLabel: "Pagina"
+    pageLabel: "Pagina",
+    factCategoryTechnology: "Tecnologia",
+    factCategorySustainability: "Sostenibilità",
+    factCategorySocial: "Dipendenti"
   },
   pl: {
     appTitle: "Asystent HR Geostick",
@@ -116,7 +134,10 @@ export const translations = {
     ],
     inputPlaceholder: "Zadaj pytanie...",
     citationsLabel: "Źródła",
-    pageLabel: "Strona"
+    pageLabel: "Strona",
+    factCategoryTechnology: "Technologia",
+    factCategorySustainability: "Zrównoważony rozwój",
+    factCategorySocial: "Pracownicy"
   },
   tr: {
     appTitle: "Geostick İK Asistanı",
@@ -133,7 +154,10 @@ export const translations = {
     ],
     inputPlaceholder: "Sorunuzu sorun...",
     citationsLabel: "Kaynaklar",
-    pageLabel: "Sayfa"
+    pageLabel: "Sayfa",
+    factCategoryTechnology: "Teknoloji",
+    factCategorySustainability: "Sürdürülebilirlik",
+    factCategorySocial: "Çalışanlar"
   },
   ar: {
     appTitle: "مساعد الموارد البشرية Geostick",
@@ -150,7 +174,10 @@ export const translations = {
     ],
     inputPlaceholder: "اطرح سؤالك...",
     citationsLabel: "المصادر",
-    pageLabel: "صفحة"
+    pageLabel: "صفحة",
+    factCategoryTechnology: "التكنولوجيا",
+    factCategorySustainability: "الاستدامة",
+    factCategorySocial: "الموظفون"
   },
   zh: {
     appTitle: "Geostick 人力资源助手",
@@ -167,7 +194,10 @@ export const translations = {
     ],
     inputPlaceholder: "提出您的问题...",
     citationsLabel: "来源",
-    pageLabel: "页"
+    pageLabel: "页",
+    factCategoryTechnology: "技术",
+    factCategorySustainability: "可持续性",
+    factCategorySocial: "员工"
   },
   pt: {
     appTitle: "Assistente de RH Geostick",
@@ -184,7 +214,10 @@ export const translations = {
     ],
     inputPlaceholder: "Faça sua pergunta...",
     citationsLabel: "Fontes",
-    pageLabel: "Página"
+    pageLabel: "Página",
+    factCategoryTechnology: "Tecnologia",
+    factCategorySustainability: "Sustentabilidade",
+    factCategorySocial: "Funcionários"
   },
   ro: {
     appTitle: "Asistent HR Geostick",
@@ -201,7 +234,10 @@ export const translations = {
     ],
     inputPlaceholder: "Pune întrebarea...",
     citationsLabel: "Surse",
-    pageLabel: "Pagină"
+    pageLabel: "Pagină",
+    factCategoryTechnology: "Tehnologie",
+    factCategorySustainability: "Durabilitate",
+    factCategorySocial: "Angajați"
   }
 };
 
