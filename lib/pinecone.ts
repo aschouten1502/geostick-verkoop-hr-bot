@@ -124,12 +124,14 @@ export function initializePinecone(apiKey: string): Pinecone {
  * @param assistantName - Naam van de Pinecone Assistant instance
  * @param pineconeClient - Geïnitialiseerde Pinecone client
  * @param userQuestion - De vraag van de gebruiker
+ * @param conversationHistory - Laatste 5 messages voor context (optioneel)
  * @returns Object met contextText, citations en cost info
  */
 export async function retrieveContext(
   assistantName: string,
   pineconeClient: Pinecone,
-  userQuestion: string
+  userQuestion: string,
+  conversationHistory?: any[]
 ): Promise<{
   contextText: string;
   citations: Citation[];
@@ -139,13 +141,39 @@ export async function retrieveContext(
   // Haal de assistant instance op
   const assistant = pineconeClient.Assistant(assistantName);
 
+  // Enhanced query: voeg laatste 5 messages toe voor betere context bij follow-ups
+  let enhancedQuery = userQuestion;
+
+  if (conversationHistory && conversationHistory.length > 0) {
+    // Pak laatste 5 messages (max 10 items = 5 user + 5 assistant)
+    const recentMessages = conversationHistory.slice(-10);
+
+    // Build context string van recente conversatie
+    const contextParts: string[] = [];
+    for (const msg of recentMessages) {
+      if (msg.role === 'user') {
+        contextParts.push(`Previous question: ${msg.content}`);
+      } else if (msg.role === 'assistant') {
+        // Gebruik alleen eerste 200 chars van assistant antwoord
+        const shortAnswer = msg.content.substring(0, 200);
+        contextParts.push(`Previous answer: ${shortAnswer}`);
+      }
+    }
+
+    // Voeg conversatie context toe aan query
+    if (contextParts.length > 0) {
+      enhancedQuery = `${contextParts.join('\n')}\n\nCurrent question: ${userQuestion}`;
+      console.log('🔄 [Pinecone] Enhanced query with conversation context (last 5 messages)');
+    }
+  }
+
   console.log('\n📚 [Pinecone] ========== FETCHING CONTEXT ==========');
-  console.log('🔍 [Pinecone] Query:', userQuestion);
+  console.log('🔍 [Pinecone] Original query:', userQuestion);
   console.log('⚙️  [Pinecone] Settings: topK=3 (reduced from 5 to lower costs)');
 
   // Vraag de context op (topK=3 betekent: geef de 3 beste matches)
   const contextResp = await assistant.context({
-    query: userQuestion,
+    query: enhancedQuery,
     topK: 3  // Verlaagd van 5 naar 3 voor ~40% kostenbesparing
   });
 

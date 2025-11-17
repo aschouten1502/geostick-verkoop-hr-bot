@@ -100,7 +100,7 @@ export async function POST(request: NextRequest) {
       citations,
       pineconeTokens,
       pineconeCost
-    } = await retrieveContext(assistantName, pineconeClient, message);
+    } = await retrieveContext(assistantName, pineconeClient, message, conversationHistory);
 
     // ========================================
     // STEP 4: Genereer system prompt
